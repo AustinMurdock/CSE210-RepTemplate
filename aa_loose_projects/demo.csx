@@ -14,7 +14,7 @@ Console.Write("input: "); // no newline after Write method
 string user_response = Console.ReadLine();
 
 // f-string ->
-Console.WriteLine($"ok, {user_response}.");
+Console.WriteLine($"ok, \"{user_response}\".");
 // '' is only used with character data type, saving a single character
 
 if (user_response != "yes" && user_response != "no") {
