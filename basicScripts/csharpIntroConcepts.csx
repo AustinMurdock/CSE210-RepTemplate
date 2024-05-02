@@ -30,8 +30,8 @@ static void Main() {
         Console.WriteLine(fruit);
     }
     // create "Random" class instance:
-    Random randomGenerator = new Random(); 
-    int number = randomGenerator.Next(1, 11);
+    Random RandomGenerator1 = new Random(); 
+    int number = RandomGenerator1.Next(1, 11);
     Console.WriteLine(number);
 
 }
