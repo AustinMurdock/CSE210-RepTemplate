@@ -24,8 +24,9 @@ static void Main() {
 
     fruits.Add("Apple");
     fruits.Add("Banan");
-
-    Console.WriteLine("Items in list \"fruits\":");
+    
+    // .Count is a property return statement
+    Console.WriteLine($"{fruits.Count} items in list \"fruits\":");
     foreach (string fruit in fruits) {
         Console.WriteLine(fruit);
     }
