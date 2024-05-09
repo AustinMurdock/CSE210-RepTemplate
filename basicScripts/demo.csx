@@ -2,8 +2,8 @@
 // ".csx" = C# script
 // capital folder names indicate projects
 
-using System; // have to import everything, including System
-// using Internal; // or import Internal (system)
+// using System; // have to import everything, including System
+using Internal; // or import Internal (system)
 
 // Console is a class, WriteLine is a method:
 Console.WriteLine();
@@ -11,7 +11,8 @@ Console.WriteLine("Hello world?");
 
 // C#'s version of Python's input:
 Console.Write("input: "); // no newline after Write method
-string user_response = Console.ReadLine();
+// string user_response = Console.ReadLine();
+string user_response = "gg"; // Console.Readline doesn't like Internal
 
 // f-string ->
 Console.WriteLine($"ok, \"{user_response}\".");

@@ -1,4 +1,5 @@
-using System;
+// using System;
+using Internal;
 
 static void Main() {
     // void function returns nothing, int function returns int:
@@ -11,7 +12,7 @@ static void Main() {
     // i++; i+=1; i=i+1:
     for (int i = 1; i <= 5; i++) {
         // i++; // increment value by 1
-        Console.WriteLine(i);
+        Console.WriteLine($"{i}");
     }
 
     // Console.WriteLine("Counting from 1 to 5:")
@@ -33,7 +34,7 @@ static void Main() {
     // create "Random" class instance:
     Random RandomGenerator1 = new Random(); 
     int number = RandomGenerator1.Next(1, 11);
-    Console.WriteLine(number);
+    Console.WriteLine($"{number}");
 
 }
 
