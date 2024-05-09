@@ -1,9 +1,8 @@
 using System;
 
-class Program
-{
-    static void Main(string[] args)
-    {
+class Program {
+    static void Main(string[] args) {
+
         Console.WriteLine();
         
         // Job is now a data type that contains 2 strings and 2 ints:
@@ -22,6 +21,16 @@ class Program
 
         job1.Display();
         job2.Display();
+
+        Console.WriteLine();
+
+        Resume resume1 = new Resume();
+        resume1._name = "Michael Jackson";
+        // resume1._jobs = [job1, job2];
+        resume1._jobs.Add(job1);
+        resume1._jobs.Add(job2);
+
+        resume1.Display();
 
         Console.WriteLine("\n");
         
