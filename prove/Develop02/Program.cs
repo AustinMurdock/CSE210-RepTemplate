@@ -10,18 +10,21 @@ class Program
         string fileName;
         
         while (true) {
-            Console.WriteLine("""
+            Console.Write("""
             Journal Options:
             1. "write"
             2. "display"
             3. "save"
             4. "load"
             5. "exit"
+
+            > 
             """);
             userInput = Console.ReadLine().ToLower();
+            Console.WriteLine();
 
             if (userInput == "write") {
-                ;
+                Console.WriteLine(Prompts.GetPrompt());
             }
             else if (userInput == "display") {
                 ;
