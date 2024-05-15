@@ -15,7 +15,7 @@ static void Main() {
         Console.WriteLine($"{i}");
     }
 
-    // Console.WriteLine("Counting from 1 to 5:")
+    // Console.WriteLine("Counting from 1 to 5:");
     // for (int i = len(list); i < 0; i--){ // i++; i+=1; i=i+1
     //     ;
     // }
