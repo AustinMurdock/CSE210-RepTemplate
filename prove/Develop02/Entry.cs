@@ -2,30 +2,19 @@ using System;
 
 class Entry
 {
-    private readonly string date;
-    // private string Date {get;}
-    private string heading;
-    private string content;
+    public string Date {get; private set;}
+    public string Heading {get; private set;}
+    public string Content {get; private set;}
 
     public Entry() { // always set default current date
-        this.date = DateTime.Today.ToString();
-    }
-    public string Date() { // compare to List.Count ?property
-        return (date);
+        this.Date = DateTime.UtcNow.ToString("MM/dd/yyyy");
     }
 
     public void SetHeading(string input) {
-        heading = input;
+        Heading = input;
     }
+
     public void SetContent(string input) {
-        content = input;
+        Content = input;
     }
-
-    public string GetHeading() {
-        return (heading);
-    }
-    public string GetContent() {
-        return (content);
-    }
-
 }

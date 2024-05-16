@@ -9,7 +9,7 @@ class Program
         string userInput;
         string fileName;
 
-        Journal newJournal = new("aaa"); // required Journal.name constructor
+        Journal newJournal = new();
         
         while (true) {
             Console.Write("""
@@ -27,7 +27,7 @@ class Program
 
             if (userInput == "1" || userInput == "write") {
                 Prompts prmpt = new();
-                Console.WriteLine($"Optional prompt: {prmpt.RandPrompt()}");
+                Console.WriteLine(prmpt.RandPrompt());
                 Console.WriteLine();
                 newJournal.AddEntry();
             }
@@ -35,10 +35,12 @@ class Program
                 newJournal.DisplayAll();
             }
             else if (userInput == "3" || userInput == "save") {
-                ;
+                Console.WriteLine(newJournal.SaveToFile($"{newJournal.Name}.csv"));
             }
             else if (userInput == "4" || userInput == "load") {
-                ;
+                Console.WriteLine("Enter the saved journal's name: ");
+                fileName = Console.ReadLine();
+                Console.WriteLine(newJournal.LoadFromFile($"{fileName}.csv"));
             }
             else if (userInput == "5" || userInput == "exit") {
                 break;
