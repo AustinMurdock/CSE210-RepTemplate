@@ -7,6 +7,7 @@ static void Main() {
         int result = a + b;
         return result;
     }
+    AddNumbers(2, 3); // to remove unused function error
 
     Console.WriteLine("Counting from 1 to 5:");
     // i++; i+=1; i=i+1:
