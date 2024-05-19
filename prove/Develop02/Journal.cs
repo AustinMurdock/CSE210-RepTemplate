@@ -1,59 +1,52 @@
 using System;
+using System.Text.RegularExpressions;
 
-class Journal // File-stored journal processing & interface
+class Journal // File-reference journal data manager
 {
     public string Name {get; private set;}
-    private List<Entry> entries = new();
-    
-    public Journal() {
-        // this.Name = name;
+    public List<Entry> Entries {get; private set;} = new();
+
+    public void SetName(string newName) {
+        Name = newName;
     }
 
-    public void AddEntry() {
-        if (Name == null) {
-            Console.Write("No current journal, enter a journal name: ");
-            Name = Console.ReadLine();
-        }
+    public void SaveEntry(List<string> inputData) {
+        Entry newEntry = new();
+        
+        newEntry.SetDate(inputData[0]);
+        newEntry.SetPrompt(inputData[1]);
+        newEntry.SetHeading(inputData[2]);
+        newEntry.SetContent(inputData[3]);
 
-        Entry newEnt = new();
-
-        Console.Write($"[{newEnt.Date}], Entry Title: ");
-        newEnt.SetHeading(Console.ReadLine());
-
-        Console.Write("  > ");
-        newEnt.SetContent(Console.ReadLine());
-
-        entries.Add(newEnt);
+        Entries.Add(newEntry);
     }
 
-    public void DisplayAll() {
-        Console.WriteLine($"Journal \"{Name}\":");
-        for (int i = 0; i < entries.Count; i++) {
-            Console.WriteLine($"{i+1}. [{entries[i].Date}]: \"{entries[i].Heading}\"");
-            Console.WriteLine($"      > \"{entries[i].Content}\"");
-        }
-    }
-
-    public string SaveToFile(string fileName) {
-        using (StreamWriter writer = new(fileName)) {
-            writer.WriteLine("Date,Heading,Content");
-            foreach (Entry entryClass in entries) {
-                writer.Write($"{entryClass.Date},");
-                writer.Write($"{entryClass.Heading},");
-                writer.WriteLine($"{entryClass.Content}");
+    public string SaveToFile() {
+        using (StreamWriter writer = new($"j_{Name}.csv")) {
+            writer.WriteLine("Date|%>⸲'>|Prompt|%>⸲'>|Heading|%>⸲'>|Content");
+            foreach (Entry entryI in Entries) {
+                // |%>⸲'>| seperation markers, including unicode U+2E32 "Turned Comma"
+                writer.Write($"{entryI.Date}|%>⸲'>|");
+                writer.Write($"{entryI.Prompt}|%>⸲'>|");
+                writer.Write($"{entryI.Heading}|%>⸲'>|");
+                writer.WriteLine($"{entryI.Content}");
             }
         }
-        return $"Data written to file \"{fileName}\"";
+        return $"\"{Name}\" data written to file \"j_{Name}.csv\"";
     }
 
-    public string LoadFromFile(string fileName) {
-        using (StreamReader reader = new(fileName)) {
+    public string LoadFromFile(string inputJournalName) {
+        using (StreamReader reader = new($"j_{inputJournalName}.csv")) {
             reader.ReadLine(); // skip heading
-            Name = fileName.Substring(0, fileName.Length-4);
-            while (reader.ReadLine() != null) {
-                Console.WriteLine(reader.ReadLine());
+
+            Name = inputJournalName;
+            Entries = new();
+
+            while (reader.Peek() >= 0) {
+                // can switch to custom MyRegex.Split for better efficiency:
+                SaveEntry(Regex.Split(reader.ReadLine(), @"\|%>⸲'>\|").ToList());
             }
         }
-        return $"Data read from file \"{fileName}\"";
+        return $"\"{Name}\" data read from file \"j_{inputJournalName}.csv\"";
     }
 }

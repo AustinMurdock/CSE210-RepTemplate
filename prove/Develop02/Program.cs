@@ -1,58 +1,51 @@
 using System;
 
+/*
+[Turned in late, at 5 in the morning]
+
+(Possibly) Exceeding Requirements:
+
+In general I tried to make the program well-structured and 
+clean/easy-to-use, which also involved creating an extra class Interface.cs 
+for the user interface/input management. All text displayed to the user 
+should only be in that class, except for some whitespace in this 
+Program.cs file, and the prompt strings in Prompts.cs.
+
+It also involved some basic error checking for inputs related to menu 
+options, blank journal names, and trying to load missing files. The only 
+significant errors I can think of right now are if someone tries to make a 
+new journal with the same name as a previous one, which can overwrite the 
+previous saved file, and low file security in general.
+
+I also tried to learn about basic {get; set;} variables, which caused 
+some issues with naming conventions, but it works out well enough for now.
+
+*/
+
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine();
-
-        string userInput;
-        string fileName;
-
-        Journal newJournal = new();
         
+        // program starts, create a starting journal for journalInterface:
+        Journal initialJournal = new();
+        Interface journalInterface = new(initialJournal);
+        
+        // loop OptionsPrompt() until JournalAct() is false:
         while (true) {
-            Console.Write("""
-            Journal Options:
-            1. "write"
-            2. "display"
-            3. "save"
-            4. "load"
-            5. "exit"
+            journalInterface.OptionsPrompt();
 
-            > 
-            """);
-            userInput = Console.ReadLine().ToLower();
             Console.WriteLine();
 
-            if (userInput == "1" || userInput == "write") {
-                Prompts prmpt = new();
-                Console.WriteLine(prmpt.RandPrompt());
-                Console.WriteLine();
-                newJournal.AddEntry();
-            }
-            else if (userInput == "2" || userInput == "display") {
-                newJournal.DisplayAll();
-            }
-            else if (userInput == "3" || userInput == "save") {
-                Console.WriteLine(newJournal.SaveToFile($"{newJournal.Name}.csv"));
-            }
-            else if (userInput == "4" || userInput == "load") {
-                Console.WriteLine("Enter the saved journal's name: ");
-                fileName = Console.ReadLine();
-                Console.WriteLine(newJournal.LoadFromFile($"{fileName}.csv"));
-            }
-            else if (userInput == "5" || userInput == "exit") {
+            if (!journalInterface.JournalAct()) {
                 break;
-            }
-            else {
-                Console.WriteLine("Invalid input, try again.");
             }
 
             Console.WriteLine();
         }
 
-        Console.WriteLine();
+        Console.WriteLine("\n");
         // Console.WriteLine("Hello Develop02 World!");
     }
 }
