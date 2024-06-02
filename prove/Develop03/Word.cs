@@ -7,18 +7,13 @@ class Word
         this.content = content;
     }
 
-    public bool SetHidden() {
-        if (!isHidden) {
-            isHidden = true;
-            return true;
-        }
-        else {
-            return false;
-        }
+    public void SetHidden() {
+        isHidden = true;
     }
 
-    public override string ToString()
-    {
+    public override string ToString() {
+        // not sure if this is good practice,
+        // but might as well try it (:
         if (!isHidden) {
             return content.ToString();
         }

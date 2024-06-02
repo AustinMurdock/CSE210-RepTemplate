@@ -10,10 +10,23 @@ class Verse
     }
 
     public void ObscureWords(float chance) {
+        bool willOverflow = false;
         Random rand = new();
+        
+        // if word is hidden & chance triggers, willOverflow = true;
+        // if word isn't hidden & (willOverflow or chance triggers),
+        // hide the word and reset willOverflow status:
         foreach (Word word in content) {
-            if (rand.NextSingle() < chance) {
-                word.SetHidden();
+            if (word.ToString().Contains('_')) {
+                if (rand.NextSingle() < chance) {
+                    willOverflow = true;
+                }
+            }
+            else {
+                if (willOverflow || rand.NextSingle() < chance) {
+                    word.SetHidden();
+                    willOverflow = false;
+                }
             }
         }
     }

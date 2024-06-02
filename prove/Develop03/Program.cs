@@ -1,5 +1,16 @@
 using System;
 
+/*
+Stretch Challenge Information:
+  - collected most of the input handling and displayed text into the Interface class
+  - Used an Interface.AddReference method to allow multiple verse references stored in the same Interface instance, 
+        with an Interface.PickOption method to allow the Interface to decide how to select a specific verse reference to display
+  - Added a basic system to improve chances of words being hidden when other words haven't:
+        If the random hiding chance succeeds on a blanked word, the next visible word will be hidden
+        (meaning a word will only stay visible if its random chance fails along with all the blank words behind it,
+        though this doesn't carry over between individual verses)
+*/
+
 class Program
 {
     static void Main(string[] args)
@@ -74,10 +85,11 @@ class Program
         while (true) {
             mainInterface.DisplayReference();
             Console.WriteLine();
+            Console.WriteLine();
             if (mainInterface.CollectInput().ToLower() == "quit" || mainInterface.AllHidden()) {
                 break;
             }
-            mainInterface.ObscureReference((float)0.2);
+            mainInterface.ObscureReference((float)0.25);
         }
 
         Console.WriteLine();

@@ -27,10 +27,6 @@ class Interface
         Console.Clear();
         Console.WriteLine(currentReference.GetLabel());
         Console.WriteLine(currentReference.AssembleVerses());
-
-        Console.WriteLine();
-
-        
     }
 
     public string CollectInput() {
