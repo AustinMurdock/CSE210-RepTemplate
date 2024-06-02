@@ -1,38 +1,53 @@
 class Interface
 {
-    List<Reference> stored = new();
+    List<Reference> storedReferences = new();
     Reference currentReference;
 
-    public Interface(List<List<string>> data) {
-        foreach (List<string> reference in data) {
-            Reference newReference = new(reference);
-            this.stored.Add(newReference);
-        }
+    public Interface() {
+        // no initial data required
     }
 
-    public void OptionsPrompt() {
+    public void AddReference(string label, List<string> verses) {
+        Reference newReference = new(label, verses);
+        this.storedReferences.Add(newReference);
+    }
+
+    public void PickOption() {
         Console.WriteLine("Current verse options:");
-        for (int i=0; i<stored.Count; i++) {
-            Console.WriteLine($"[{i+1}] {stored[i].GetLabel()}");
+        for (int i=0; i<storedReferences.Count; i++) {
+            Console.WriteLine($"[{i+1}] {storedReferences[i].GetLabel()}");
         }
         Console.WriteLine();
         
         Console.Write("Enter a number: ");
-        currentReference = stored[int.Parse(Console.ReadLine())-1];
+        currentReference = storedReferences[int.Parse(Console.ReadLine())-1];
     }
 
-    public bool DisplayReference() {
+    public void DisplayReference() {
         Console.Clear();
         Console.WriteLine(currentReference.GetLabel());
         Console.WriteLine(currentReference.AssembleVerses());
-        Console.ReadLine();
 
+        Console.WriteLine();
+
+        
+    }
+
+    public string CollectInput() {
+        Console.Write("Press Enter or type \"quit\": ");
+        return Console.ReadLine();
+    }
+
+    public void ObscureReference(float chance) {
+        currentReference.ObscureVerses(chance);
+    }
+
+    public bool AllHidden() {
         if (currentReference.AssembleVerses().All(c => c == ' ' || c == '_' || c == '\n')) {
-            return false;
+            return true;
         }
         else {
-            currentReference.ObscureVerses((float)0.2);
-            return true;
+            return false;
         }
     }
 }
