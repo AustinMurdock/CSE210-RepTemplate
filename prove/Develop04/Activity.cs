@@ -1,14 +1,24 @@
 
 abstract class Activity
 {
-    private int seconds = 0;
+    protected string name;
+    protected string description;
+    protected int seconds = 0;
 
-    public Activity() {}
+    public Activity() {
+        this.name = "Activity";
+        this.description = "This is the default description of a generic activity.";
+    }
 
-    public abstract void DisplayDescription();
+    public void DisplayDescription() {
+        Console.WriteLine($"Starting {name}:");
+        Console.WriteLine();
+        Console.WriteLine($"\"{description}\"");
+        WaitingAnimation();
+    }
 
     public void PromptSetSeconds() {
-        Console.WriteLine("How many seconds should the activity last? ");
+        Console.Write("How many seconds should the activity last? ");
         while (true) {
             try {
                 this.seconds = Int32.Parse(Console.ReadLine());
@@ -22,29 +32,41 @@ abstract class Activity
         }
     }
 
-    protected void WaitingAnimation(int milliseconds = 3000) {
+    protected void WaitingAnimation(int spinMs = 600, int totalMs = 3000) {
         DateTime startTime = DateTime.Now;
         List<char> charList = new(['&', '\\', '|', '/', '%', '~', '-', '~']);
 
         Console.CursorVisible = false;
 
-        while (DateTime.Now < startTime.AddMilliseconds(milliseconds)) {
+        while (DateTime.Now < startTime.AddMilliseconds(totalMs)) {
             foreach (char x in charList) {
-                if (DateTime.Now > startTime.AddMilliseconds(milliseconds)) {
+                if (DateTime.Now > startTime.AddMilliseconds(totalMs)) {
                     break;
                 }
                 Console.Write(x);
-                Thread.Sleep((int)(500/charList.Count));
-                Console.Write("\b");
+                Thread.Sleep((int)(spinMs/charList.Count));
+                Console.Write("\b \b");
             }
         }
 
         Console.CursorVisible = true;
     }
 
+    protected void Countdown(int seconds) {
+        for (int i=seconds; i>0; i--) {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            foreach (char x in i.ToString()) {
+                // to remove all when printing multiple digits
+                Console.Write("\b \b");
+            }
+            // Console.Write(" \b");
+        }
+    }
+
     public void DisplayEnd() {
         Console.WriteLine("Well done!");
-        Console.WriteLine();
         Console.WriteLine($"You completed another {seconds} seconds of the activity.");
+        WaitingAnimation();
     }
 }

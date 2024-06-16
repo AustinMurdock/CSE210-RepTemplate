@@ -1,5 +1,9 @@
 using System;
 
+/*
+No stretch challenge completed.
+*/
+
 class Program
 {
     static void Main()
@@ -22,21 +26,59 @@ class Program
             Console.Write("Enter a number: ");
             input = Console.ReadLine();
 
+            Console.WriteLine();
+
             if (input == "1") {
                 BreathingActivity breathing = new();
+
+                Console.Clear();
                 
                 breathing.DisplayDescription();
+                Console.WriteLine();
                 breathing.PromptSetSeconds();
+                Console.Clear();
+
+                breathing.BreatheLoop();
                 breathing.DisplayEnd();
 
                 Console.Clear();
             }
             else if (input == "2") {
+                ReflectionActivity reflection = new();
+
+                Console.Clear();
                 
+                reflection.DisplayDescription();
+                Console.WriteLine();
+                reflection.PromptSetSeconds();
+                Console.Clear();
+
+                reflection.DisplayPrompt();
+                Console.WriteLine();
+                Console.WriteLine();
+                reflection.QuestionsLoop();
+                Console.WriteLine();
+                reflection.DisplayEnd();
+
                 Console.Clear();
             }
             else if (input == "3") {
+                ListingActivity listing = new();
+
+                Console.Clear();
                 
+                listing.DisplayDescription();
+                Console.WriteLine();
+                listing.PromptSetSeconds();
+                Console.Clear();
+
+                listing.DisplayPrompt();
+                Console.WriteLine();
+                listing.InputLoop();
+                listing.DisplayCount();
+                Console.WriteLine();
+                listing.DisplayEnd();
+
                 Console.Clear();
             }
             else if (input == "4") {
