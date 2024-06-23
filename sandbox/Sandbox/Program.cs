@@ -1,9 +1,13 @@
-using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello Sandbox World!");
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+        // Console.WriteLine("Hello Sandbox World!");
     }
 }
