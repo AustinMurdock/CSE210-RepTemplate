@@ -15,8 +15,13 @@ class Room
         this.devices = devices;
     }
 
+    public void ToggleAllLights() {
+        foreach (SmartLight light in this.devices.OfType<SmartLight>()) {
+            light.ToggleState();
+        }
+    }
     public void ToggleAllLights(bool setState) {
-        foreach (SmartLight light in this.devices) {
+        foreach (SmartLight light in this.devices.OfType<SmartLight>()) {
             light.ToggleState(setState);
         }
     }
@@ -29,6 +34,11 @@ class Room
         }
     }
 
+    public void ToggleAllDevices() {
+        foreach (SmartDevice device in this.devices) {
+            device.ToggleState();
+        }
+    }
     public void ToggleAllDevices(bool setState) {
         foreach (SmartDevice device in this.devices) {
             device.ToggleState(setState);
@@ -69,5 +79,9 @@ class Room
         }
 
         return maxLengthName;
+    }
+
+    public List<SmartDevice> GetDevices() {
+        return this.devices;
     }
 }

@@ -9,4 +9,8 @@ class House
         // }
         this.rooms = rooms;
     }
+
+    public List<Room> GetRooms() {
+        return rooms;
+    }
 }
